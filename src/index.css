@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-blue: #2563eb;
+  --color-brand-green: #15803d;
+  --color-earth-100: #fdfcfa;
+  --color-earth-200: #f4f1ea;
+  --color-slate-text: #334155;
+  --color-slate-sub: #64748b;
+  --font-sans: "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  @apply bg-earth-100 text-slate-text font-sans;
+}

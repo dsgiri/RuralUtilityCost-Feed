@@ -1,0 +1,78 @@
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, Droplets } from 'lucide-react';
+import { useState } from 'react';
+
+export function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  const navLinks = [
+    { label: 'Feed Hub', path: '/' },
+    { label: 'Plan', path: '/plan' },
+    { label: 'Forecast', path: '/forecast' },
+    { label: 'What If', path: '/what-if' },
+    { label: 'Predictor', path: '/predictor' },
+    { label: 'My Favorites', path: '/favorites' },
+  ];
+
+  return (
+    <header className="h-[60px] bg-white border-b border-slate-200 flex items-center shrink-0 w-full z-10 sticky top-0 px-4 md:px-6 justify-between">
+      <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
+          <span className="font-bold text-[18px] text-brand-blue leading-none tracking-tight">RuralUtilityCost</span>
+          <span className="text-slate-300 leading-none">|</span>
+          <span className="font-normal text-[18px] text-slate-sub leading-none">Feed</span>
+        </Link>
+      </div>
+
+      <nav className="hidden md:flex gap-5 h-full items-center">
+        {navLinks.map((link) => {
+          const isActive = location.pathname === link.path || (link.path === '/' && location.pathname === '/');
+          return (
+            <Link
+              key={link.label}
+              to={link.path}
+              className={`text-[13px] font-medium h-full flex items-center transition-colors ${
+                isActive 
+                  ? 'text-brand-blue border-b-2 border-brand-blue -mb-[2px] mt-[2px]' 
+                  : 'text-slate-sub hover:text-slate-text border-b-2 border-transparent -mb-[2px] mt-[2px]'
+              }`}
+            >
+              {link.label}
+            </Link>
+          );
+        })}
+      </nav>
+
+      <div className="hidden md:block">
+        <div className="text-[12px] font-semibold px-3 py-1 bg-slate-100 rounded-full text-slate-text">
+          Member ID: 8842
+        </div>
+      </div>
+
+      <div className="md:hidden flex items-center">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="text-slate-sub hover:text-slate-text focus:outline-none p-2"
+        >
+          <Menu className="h-6 w-6" />
+        </button>
+      </div>
+
+      {isOpen && (
+        <div className="md:hidden fixed top-[60px] left-0 right-0 bg-white border-b border-slate-200 shadow-lg p-4 flex flex-col gap-4 z-20">
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              to={link.path}
+              className="text-slate-sub hover:text-slate-text block text-base font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </header>
+  );
+}

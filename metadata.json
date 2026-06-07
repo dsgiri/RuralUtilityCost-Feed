@@ -1,0 +1,6 @@
+{
+  "name": "Feed by Rural Utility Cost",
+  "description": "Feed planning and cost hub for rural and agricultural users. Compare feed options, estimate costs, and plan rations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
